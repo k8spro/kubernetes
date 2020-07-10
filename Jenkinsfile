@@ -15,7 +15,7 @@ stage('SCM') {
           }
     
    stage('Deploy to k8s') {
-        sh " export KUBECONFIG=/opt/config "
+        sh " export KUBECONFIG=config "
         sh " kubectl set image sai/frontend apache=docker${env.BUILD_NUMBER} "
    }
   
