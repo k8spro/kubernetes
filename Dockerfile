@@ -1,9 +1,5 @@
 FROM ubuntu:latest
-
-ARG DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get update \
-&& apt-get -y install sudo \
 && apt-get -y install apt-utils  \
 && apt-get -y install curl \
 RUN apt-get -y install apache2 \
