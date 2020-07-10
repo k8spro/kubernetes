@@ -9,8 +9,8 @@ ENV NGINX_VERSION 1.17.5-1~buster
 # Install Basic Requirements
 RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && set -x \
-    && apt-get update \
-    && apt-get install --no-install-recommends $buildDeps --no-install-suggests -q -y gnupg2 dirmngr wget apt-transport-https lsb-release ca-certificates \
+    && apt-get -y update \
+    && apt-get -y install --no-install-recommends $buildDeps --no-install-suggests -q -y gnupg2 dirmngr wget apt-transport-https lsb-release ca-certificates \
     && \
     NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
           found=''; \
@@ -25,7 +25,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
           done; \
     test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
     echo "deb http://nginx.org/packages/mainline/debian/ buster nginx" >> /etc/apt/sources.list \
-    && apt-get update \
+    && apt-get -y update \
     && apt-get install --no-install-recommends --no-install-suggests -q -y \
             apt-utils \
             vim \
@@ -40,7 +40,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
   
 # Clean up
     RUN apt-get purge -y --auto-remove $buildDeps \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean 
 
 # Override default nginx welcome page
 COPY index.html /usr/share/nginx/html/
