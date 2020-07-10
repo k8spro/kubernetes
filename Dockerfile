@@ -9,8 +9,8 @@ ENV NGINX_VERSION 1.17.5-1~buster
 # Install Basic Requirements
 RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && set -x \
-    && apt-get update \
-    && apt-get install --no-install-recommends $buildDeps --no-install-suggests -q -y gnupg2 dirmngr wget apt-transport-https lsb-release ca-certificates \
+    && apt-get -y update \
+    && apt-get -y install --no-install-recommends $buildDeps --no-install-suggests -q -y gnupg2 dirmngr wget apt-transport-https lsb-release ca-certificates \
     && \
     NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
           found=''; \
@@ -33,12 +33,6 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
             vim \
             zip \
             unzip \
-            python-pip \
-            python-setuptools \
-            git \
-            libmemcached-dev \
-            libmemcached11 \
-            libmagickwand-dev \
             nginx=${NGINX_VERSION} \
             procps \
   
