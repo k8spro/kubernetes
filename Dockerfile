@@ -1,6 +1,6 @@
 FROM ubuntu:latest
-RUN apt-get update -y\
-RUN apt-get install software-properties-common -y \
+RUN apt-get -y update \
+RUN apt-get -y install software-properties-common \
 && apt-get -y install apt-utils  \
 && apt-get -y install curl \
 && apt-get -y install sudo \
