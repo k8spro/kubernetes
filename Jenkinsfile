@@ -1,4 +1,3 @@
-env.KUBECONFIG = '/opt/config'
 node() {
 stage('SCM') {
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '498a5710-2f8a-4522-ab67-9f415d370965', url: 'https://github.com/k8spro/kubernetes.git']]])
@@ -16,7 +15,7 @@ stage('SCM') {
           }
     
    stage('Deploy to k8s') {
-        sh " export env.KUBECONFIG"       
+        sh " export KUBECONFIG = /opt/config"       
         sh " kubectl set image deployment/sai httpd=ravali81/kubernetes:docker${env.BUILD_NUMBER} "
    }
   
